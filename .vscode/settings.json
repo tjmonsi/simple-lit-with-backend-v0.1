@@ -1,0 +1,89 @@
+{
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[python]": {
+    "editor.tabSize": 4
+  },
+  "editor.tabSize": 2,
+  "editor.tabCompletion": "on",
+  "files.trimTrailingWhitespace": true,
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "js/ts.implicitProjectConfig.experimentalDecorators": true,
+  "javascript.validate.enable": true,
+  "standard.enable": true,
+  "standard.semistandard": true,
+  "plopTemplates.plopCommand": "npx:plop",
+  "standard.options": {
+    "plugins": [
+      "html",
+      "standard",
+      "promise",
+      "mocha",
+      "html",
+      "@typescript-eslint",
+      "chai-expect"
+    ],
+    "parser": "babel-eslint",
+    "env": [
+      "mocha"
+    ],
+    "ignore": [
+      "example/dist",
+      "dist",
+      "dist/**",
+      "public",
+      "docs",
+      "hugo"
+    ],
+    "globals": [
+      "describe",
+      "it",
+      "after",
+      "before",
+      "expect"
+    ]
+  },
+  "standard.validate": [
+    "javascript",
+    "html"
+  ],
+  "standard.engine": "semistandard",
+  "standard.autoFixOnSave": true,
+  "standard.usePackageJson": true,
+  "npm-intellisense.packageSubfoldersIntellisense": true,
+  "path-intellisense.extensionOnImport": true,
+  "stylelint.validate": [
+    "css",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "less",
+    "markdown",
+    "sass",
+    "scss",
+    "source.css.styled",
+    "source.markdown.math",
+    "styled-css",
+    "sugarss",
+    "svelte",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "vue-html",
+    "vue-postcss",
+    "xml",
+    "xsl"
+  ],
+  "stylelint.config": {
+    "ignoreFiles": ["**/*.cjs" , "node_modules"]
+  },
+  "npm-intellisense.showBuildInLibs": true,
+  "javascript.referencesCodeLens.enabled": true,
+  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "javascript.inlayHints.variableTypes.enabled": true,
+  "javascript.inlayHints.parameterTypes.enabled": true,
+  "eslint.alwaysShowStatus": true
+}

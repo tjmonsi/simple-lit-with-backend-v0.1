@@ -1,0 +1,135 @@
+image: "node:lts-buster"
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+  GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  SAST_EXCLUDED_PATHS: "spec, test, tests, tmp, node_modules, env, dist, hugo, docs, .vscode, .husky, .gitlab, hugo-scripts, jsdoc, node-bash, plop-utils, secret, types, src/public, webpack.config.cjs, plopfile.cjs, playwright.config.cjs, postbump.js, e2e"
+  DEV_ENV_URL: "https://example.com"
+  STAGING_ENV_URL: "https://example.com"
+  UAT_ENV_URL: "https://example.com"
+  PROD_ENV_URL: "https://example.com"
+
+
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+# add 'node_modules' to cache for speeding up builds
+# cache:
+#   paths:
+#     - node_modules/ # Node modules and dependencies
+#     - .nyc_output
+#     - .nyc_coverage
+
+stages:
+  - pre-test
+  - test
+  - deploy
+
+default:
+  tags:
+    - main-runner
+
+sast:
+  stage: pre-test
+  script:
+    - echo "start sast"
+
+install-dependencies:
+  stage: pre-test
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 day
+  script:
+    - npm ci
+
+run-test:
+  stage: test
+  image:
+    name: gcr.io/senti-iam-manager/senti-base-development-frontend-gitpod-image
+  artifacts:
+    when: always
+    paths:
+      - .nyc_output
+      - .nyc_coverage
+    expire_in: 1 day
+  coverage: /^All\s*files\s*\|\s*([^|]+)/
+  script:
+    - npm run ci:get:env
+    - npm test
+
+# the 'pages' job will deploy and build your site to the 'public' path
+pages:
+  stage: deploy
+  image:
+    name: gitpod/workspace-full
+    entrypoint: [""]
+  script:
+    - brew install hugo
+    - hugo
+  artifacts:
+    paths:
+      - public
+  when: always
+  only:
+    - master
+    - main
+    - tags
+
+.deploy-base:
+  stage: deploy
+  image:
+    name: gcr.io/senti-iam-manager/senti-base-development-gitpod-image
+  script:
+    - npm run ci:get:env
+    - npm run sentry:release
+    - npm run webpack:build:production
+    - npm run build
+    - npm run deploy
+
+deploy-dev:
+  extends: .deploy-base
+  only:
+    - master
+    - main
+  environment:
+    name: development
+    url: $DEV_ENV_URL
+
+deploy-staging:
+  extends: .deploy-base
+  only:
+    - staging
+  environment:
+    name: staging
+    url: $STAGING_ENV_URL
+
+deploy-uat:
+  extends: .deploy-base
+  only:
+    - uat
+  environment:
+    name: uat
+    url: $UAT_ENV_URL
+
+deploy-release:
+  extends: .deploy-base
+  only:
+    - release
+  environment:
+    name: production
+    url: $PROD_ENV_URL
+
+sonarcloud-check:
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .sonar/cache
+  stage: deploy
+  script:
+    - sonar-scanner
+  when: always

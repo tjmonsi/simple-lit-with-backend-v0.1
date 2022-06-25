@@ -1,0 +1,10 @@
+node_modules/
+hugo/
+docs/
+.vscode/
+.husky/
+.gitlab/
+test/
+types/
+.gitignore
+.git/

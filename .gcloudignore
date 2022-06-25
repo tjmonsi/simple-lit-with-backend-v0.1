@@ -1,0 +1,16 @@
+README.md
+node_modules
+npm-debug.log
+config
+setup
+.gitlab
+.husky
+.nyc_output
+.vscode
+.nyc_coverage
+node-bash
+plop-utils
+test
+types
+docs
+hugo

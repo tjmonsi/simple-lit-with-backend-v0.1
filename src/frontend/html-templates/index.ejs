@@ -1,0 +1,18 @@
+<% const { app } = require('./config.json'); %><!DOCTYPE html>
+<html>
+  <head>
+    <%= require('./templates/head.partial.ejs')({ app }) %>
+  </head>
+  <body>
+    <!-- Put additional header components here -->
+    <header-component></header-component>
+    <!-- End components here -->
+    <%= require('./templates/main.partial.ejs')({ app }) %>
+
+    <!-- Put additional header components here -->
+    <footer-component></footer-component>
+    <!-- End components here -->
+
+  </body>
+</html>
+

@@ -1,0 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npm run semistandard
+npm run create:source
+npm run update:docs:date
+git add --all

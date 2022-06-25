@@ -1,0 +1,43 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: npm i && npm i -g standard && npx husky install && node node-bash/base/create-base-env.js
+  - command: mkdir -p config && echo $GCLOUD_SENTI_KEY > config/dev.json && node node-bash/base/fix-package.js && npm run gcloud:init && npm run gcloud:login && source ~/.bashrc
+
+ports:
+  - port: 8080
+
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker
+    - oouo-diogo-perdigao.docthis
+    - mikestead.dotenv
+    - editorconfig.editorconfig
+    - dbaeumer.vscode-eslint
+    - donjayamanne.githistory
+    - shyykoserhiy.git-autoconfig
+    - gitlab.gitlab-workflow
+    - eamodio.gitlens
+    - hashicorp.terraform
+    - abusaidm.html-snippets
+    - xabikos.javascriptsnippets
+    - ms-kubernetes-tools.vscode-kubernetes-tools
+    - ipedrazas.kubernetes-snippets
+    - vymarkov.nodejs-devops-extension-pack
+    - eg2.vscode-npm-script
+    - christian-kohler.npm-intellisense
+    - fabiospampinato.vscode-open-in-npm
+    - christian-kohler.path-intellisense
+    - esbenp.prettier-vscode
+    - humao.rest-client
+    - syler.sass-indented
+    - stylelint.vscode-stylelint
+    - yatki.vscode-surround
+    - gruntfuggly.todo-tree
+    - ms-vscode.vscode-typescript-tslint-plugin
+    - marcostazi.vs-code-vagrantfile
+    - aaron-bond.better-comments
+    - kahole.magit
+    - vscode-icons-team.vscode-icons
+    - pkief.material-icon-theme

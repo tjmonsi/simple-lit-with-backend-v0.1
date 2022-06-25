@@ -1,0 +1,25 @@
+title = """
+simple-lit-with-backend-v0.1
+simple-lit-with-backend-v0.1
+"""
+baseURL = "https://tjmonsi.gitlab.io//simple-lit-with-backend-v0.1/"
+languageCode = "en-us"
+contentdir = "docs"
+archetypedir = "hugo/archetypes"
+resourcedir = "hugo/resources"
+assetdir = "hugo/assets"
+layoutdir = "hugo/layouts"
+publishdir = "public"
+themesdir = "hugo/themes"
+theme = "docport"
+disableKinds = [ "taxonomyTerm" ]
+pygmentsCodefences = true
+pygmentsCodeFencesGuesSsyntax = false
+pygmentsOptions = ""
+pygmentsStyle = "monokai"
+pygmentsUseClasses = false
+defaultContentLanguage = "en"
+
+[Params]
+color_main = "#909090"
+color_second = "red"
