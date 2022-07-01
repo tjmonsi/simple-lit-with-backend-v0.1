@@ -70,7 +70,7 @@
     "@playwright/test": "1.23.1",
     "@types/jsdoc-to-markdown": "7.0.3",
     "@types/mocha": "9.1.1",
-    "@typescript-eslint/eslint-plugin": "5.30.0",
+    "@typescript-eslint/eslint-plugin": "5.30.3",
     "babel-loader": "8.2.5",
     "browserlist": "1.0.1",
     "c8": "7.11.3",
