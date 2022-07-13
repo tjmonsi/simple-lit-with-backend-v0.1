@@ -99,7 +99,7 @@
     "is-invalid-path": "1.0.2",
     "istanbul-lib-coverage": "3.2.0",
     "istanbul-lib-report": "3.0.0",
-    "istanbul-reports": "3.1.4",
+    "istanbul-reports": "3.1.5",
     "jsdoc-to-markdown": "7.1.1",
     "must": "0.13.4",
     "nodemon": "2.0.19",
